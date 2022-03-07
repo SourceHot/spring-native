@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 the original author or authors.
+ * Copyright 2019-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,34 +27,34 @@ import com.wavefront.sdk.entities.metrics.WavefrontMetricSender;
 import com.wavefront.sdk.entities.tracing.WavefrontTracingSpanSender;
 import com.wavefront.spring.autoconfigure.WavefrontAutoConfiguration;
 import com.wavefront.spring.autoconfigure.WavefrontProperties;
+import io.micrometer.binder.jetty.JettyServerThreadPoolMetrics;
+import io.micrometer.binder.jvm.ClassLoaderMetrics;
+import io.micrometer.binder.jvm.JvmGcMetrics;
+import io.micrometer.binder.jvm.JvmMemoryMetrics;
+import io.micrometer.binder.jvm.JvmThreadMetrics;
+import io.micrometer.binder.kafka.KafkaClientMetrics;
+import io.micrometer.binder.logging.Log4j2Metrics;
+import io.micrometer.binder.logging.LogbackMetrics;
+import io.micrometer.binder.system.FileDescriptorMetrics;
+import io.micrometer.binder.system.ProcessorMetrics;
+import io.micrometer.binder.system.UptimeMetrics;
+import io.micrometer.binder.tomcat.TomcatMetrics;
 import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.binder.MeterBinder;
-import io.micrometer.core.instrument.binder.jetty.JettyServerThreadPoolMetrics;
-import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics;
-import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
-import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
-import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics;
-import io.micrometer.core.instrument.binder.kafka.KafkaClientMetrics;
-import io.micrometer.core.instrument.binder.logging.Log4j2Metrics;
-import io.micrometer.core.instrument.binder.logging.LogbackMetrics;
-import io.micrometer.core.instrument.binder.system.FileDescriptorMetrics;
-import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
-import io.micrometer.core.instrument.binder.system.UptimeMetrics;
-import io.micrometer.core.instrument.binder.tomcat.TomcatMetrics;
 import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 import io.micrometer.core.instrument.config.MeterFilter;
 import io.micrometer.core.instrument.config.MeterRegistryConfig;
 import io.micrometer.core.instrument.push.PushMeterRegistry;
 import io.micrometer.core.instrument.push.PushRegistryConfig;
 
-import org.springframework.nativex.hint.TypeAccess;
-import org.springframework.nativex.type.NativeConfiguration;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.nativex.hint.NativeHint;
 import org.springframework.nativex.hint.ResourceHint;
+import org.springframework.nativex.hint.TypeAccess;
 import org.springframework.nativex.hint.TypeHint;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.nativex.type.NativeConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 @NativeHint(trigger = WavefrontAutoConfiguration.class, options = "--enable-https", types = {

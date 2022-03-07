@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.4</version>
+		<version>3.0.0-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.spring.test</groupId>
@@ -15,7 +15,9 @@
 	<description>ApplicationRunner test application</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
+		<!-- See https://github.com/spring-projects-experimental/spring-native/issues/1514 -->
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 	</properties>
 
 	<dependencies>

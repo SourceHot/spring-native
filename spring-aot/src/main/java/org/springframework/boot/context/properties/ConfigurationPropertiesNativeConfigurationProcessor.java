@@ -115,6 +115,7 @@ class ConfigurationPropertiesNativeConfigurationProcessor implements BeanFactory
 			return isImplicitConstructorBindingType(type) || hasConstructorBinding(type);
 		}
 
+		// TODO: constructor binding is detected automatically in 3.0
 		private static boolean isImplicitConstructorBindingType(Class<?> type) {
 			Class<?> superclass = type.getSuperclass();
 			return (superclass != null) && "java.lang.Record".equals(superclass.getName());

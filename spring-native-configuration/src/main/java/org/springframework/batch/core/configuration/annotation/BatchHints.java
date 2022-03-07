@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 the original author or authors.
+ * Copyright 2019-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package org.springframework.batch.core.configuration.annotation;
 import org.springframework.aop.framework.autoproxy.InfrastructureAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.batch.BasicBatchConfigurer;
 import org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner;
-import org.springframework.boot.jdbc.AbstractDataSourceInitializer;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
+import org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer;
 import org.springframework.nativex.hint.AotProxyHint;
 import org.springframework.nativex.hint.TypeAccess;
 import org.springframework.nativex.hint.JdkProxyHint;
@@ -45,7 +45,7 @@ import org.springframework.nativex.type.NativeConfiguration;
 		}),
 		types = {
 		@TypeHint(types = TypeAccess.class, access = {}), // Required for @EnableBatchProcessing + @TypeHint(types = Person.class, access = ...) ?
-		@TypeHint(types = AbstractDataSourceInitializer.class, access = { TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS}),
+		@TypeHint(types = AbstractScriptDatabaseInitializer.class, access = { TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS}),
 		@TypeHint(types = {
 			BasicBatchConfigurer.class,
 			JobLauncherApplicationRunner.class,
